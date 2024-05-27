@@ -1,0 +1,3 @@
+# Laravel 11 Shop Admin Interface Demo & Tutorial
+
+Details to come...
