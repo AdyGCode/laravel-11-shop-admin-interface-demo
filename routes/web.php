@@ -8,11 +8,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [StaticPageController::class, 'home'])->name('home');
 Route::get('/contact-us', [StaticPageController::class, 'contactUs'])->name('contact-us');
 
+Route::get('/contact-us', [StaticPageController::class, 'contactUs'])->name('contact-us');
 
 Route::prefix('admin')
     ->middleware(['auth', 'verified'])
-    ->get('dashboard', [StaticPageController::class, 'adminDashboard'])
-    ->name('admin-dashboard');
+    ->group(function () {
+        Route::get('dashboard', [StaticPageController::class, 'adminDashboard'])
+            ->name('dashboard');
+        Route::get('inbox', [StaticPageController::class, 'adminDashboard'])
+            ->name('admin-inbox');
+    });
+
+Route::prefix('client')
+    ->middleware(['auth', 'verified'])
+    ->get('dashboard', [StaticPageController::class, 'welcome'])
+    ->name('client-dashboard');
 
 
 Route::middleware('auth')->group(function () {
